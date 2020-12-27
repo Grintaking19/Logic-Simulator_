@@ -33,6 +33,21 @@ ActionType Input::GetUserAction() const
 		//[1] If user clicks on the Toolbar
 		if ( y >= 0 && y < UI.ToolBarHeight)
 		{	
+			ITM_AND2 = 0;
+			ITM_OR2 = 1;
+			ITM_NOT = 2;
+			ITM_BUFF = 3;
+			ITM_AND3 = 4;
+			ITM_NAND = 5;
+			ITM_NOR2 = 6;
+			ITM_NOR3 = 7;
+			ITM_XOR2 = 8;
+			ITM_XOR3 = 9;
+			ITM_XNOR = 10;
+			ITM_SWITCH = 11;
+			ITM_LED = 12;
+			ITM_CONNECTION = 13;
+			ITM_EXIT = 14;
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
 			int ClickedItemOrder = (x / UI.ToolItemWidth);
@@ -43,6 +58,20 @@ ActionType Input::GetUserAction() const
 			{
 			case ITM_AND2: return ADD_AND_GATE_2;
 			case ITM_OR2: return ADD_OR_GATE_2;
+					//Ali//
+			case ITM_AND3: return ADD_AND_GATE_3;
+			case ITM_NOT: return ADD_NOT_GATE;
+			case ITM_BUFF: return ADD_Buff;
+			case ITM_NAND:return ADD_NAND_GATE_2;
+			case ITM_NOR2:return ADD_NOR_GATE_2;
+			case ITM_NOR3:return ADD_NOR_GATE_3;
+			case ITM_XOR2:return ADD_XOR_GATE_2;
+			case ITM_XOR3:return ADD_XOR_GATE_3;
+			case ITM_XNOR:return ADD_XNOR_GATE_2;
+			case ITM_SWITCH:return ADD_Switch;
+			case ITM_LED:return ADD_LED;
+			case ITM_CONNECTION:return ADD_CONNECTION;	
+
 			case ITM_EXIT: return EXIT;	
 			
 			default: return DSN_TOOL;	//A click on empty place in desgin toolbar
