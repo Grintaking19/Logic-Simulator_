@@ -94,6 +94,9 @@ void Output::CreateDesignToolBar() const
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
 	MenuItemImages[ITM_AND2] = "images\\Menu\\Menu_AND2.jpg";
+	//ALi(ITM_AND3 only)
+	MenuItemImages[ITM_AND3] = "images\\Menu\\Menu_AND3.jpg";
+	
 	MenuItemImages[ITM_OR2]  = "images\\Menu\\Menu_OR2.jpg";
 	MenuItemImages[ITM_NOT] = "images\\Menu\\Menu_NOT.jpg";
 	MenuItemImages[ITM_BUFF] = "images\\Menu\\Menu_BUFF.jpg";
