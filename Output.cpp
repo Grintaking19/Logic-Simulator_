@@ -94,10 +94,8 @@ void Output::CreateDesignToolBar() const
 	//First prepare List of images for each menu item
 	string MenuItemImages[ITM_DSN_CNT];
 	MenuItemImages[ITM_AND2] = "images\\Menu\\Menu_AND2.jpg";
-	//ALi(ITM_AND3 only)
+	MenuItemImages[ITM_OR2] = "images\\Menu\\Menu_OR2.jpg";
 	MenuItemImages[ITM_AND3] = "images\\Menu\\Menu_AND3.jpg";
-	
-	MenuItemImages[ITM_OR2]  = "images\\Menu\\Menu_OR2.jpg";
 	MenuItemImages[ITM_NOT] = "images\\Menu\\Menu_NOT.jpg";
 	MenuItemImages[ITM_BUFF] = "images\\Menu\\Menu_BUFF.jpg";
 	MenuItemImages[ITM_NAND] = "images\\Menu\\Menu_NAND.jpg";
@@ -199,9 +197,9 @@ void Output::DrawNOT(GraphicsInfo r_GfxInfo, bool selected) const
 {
 	string GateImage;
 	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Gates\\Gate_NOT_Hi.jpg";
+		GateImage = "Images\\Menu\\Menu_NOT_Hi.jpg";
 	else
-		GateImage = "Images\\Gates\\Gate_NOT.jpg";
+		GateImage = "Images\\Menu\\Menu_NOT.jpg";
 
 	//Draw AND2 Gate at Gfx_Info (1st corner)
 	//Set the Image Width & Height by AND2 Image Parameter in UI_Info
@@ -214,9 +212,9 @@ void Output::DrawSWITCH(GraphicsInfo r_GfxInfo, bool selected) const
 {
 	string GateImage;
 	if (selected)	//use image in the highlighted case
-		GateImage = "Images\\Gates\\Gate_SWITCH_Hi.jpg";
+		GateImage = "Images\\Menu\\Menu_SWITCH_Hi.jpg";
 	else
-		GateImage = "Images\\Gates\\Gate_SWITCH.jpg";
+		GateImage = "Images\\Menu\\Menu_SWITCH.jpg";
 
 	//Draw AND2 Gate at Gfx_Info (1st corner)
 	//Set the Image Width & Height by AND2 Image Parameter in UI_Info
@@ -316,12 +314,34 @@ void Output::DrawXNOR(GraphicsInfo r_GfxInfo, bool selected) const
 }
 
 
-
 void Output::DrawConnection(GraphicsInfo r_GfxInfo, bool selected) const
-{
-	//TODO: Add code to draw connection
+	{
+		GetPointClicked(x1, y1);
+		GetPointClicked(x2, y2);
+		if (y1 == y2)
+		{
+			DrawLine(x1, y1, x2, y2, frame);
+		}
+		else if (y1 != y2)
+		{
+			DrawLine(x1, y1, x2 / 2, y1, frame);
+			DrawLine(x2 / 2, y1, x2 / 2, y2, frame);
+			Drawline(x2 / 2, y2, x2, y2, frame);
+
+		}
+
 }
 
+void Output::DrawBUFF(GraphicsInfo r_GfxInfo, bool selected) const
+{
+	string GateImage;
+	if (selected)
+		GateImage = "Images\\Menu\\Menu_BUFF_Hi.jpg";
+	else
+		GateImage = "Images\\Menu\\Menu_BUFF.jpg";
+
+	pWind->DrawImage(GateImage, r_GfxInfo.x1, r_GfxInfo.y1, UI.AND2_Width, UI.AND2_Height);
+}
 
 Output::~Output()
 {
