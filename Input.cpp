@@ -12,46 +12,45 @@ void Input::GetPointClicked(int &x, int &y)
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
-// This is the ASSCII value of 
-const char Enter = '\r';
-const char Escape = '\e';
-const char Backspace ='\b';
-
-
-string Input::GetSrting(Output *pOut)
+string Input::GetSrting(Output* pOut)
 {
-	
-	string str;
+	//This the ASCII value of the three buttoms and we do so bec. WaitKeyPress accepts the ASCII value
+	const char Enter = '\r';
+	const char  Escape = '\e';
+	const char Backspace = '\b';
+
+	string str=" ";
 	char ch;
-	pWind->FlushKeyQueue(); // we do this to overcome any miss clicks returned
+	pWind->FlushKeyQueue(); 
 	do
 	{
-		pWind->WaitKeyPress(ch); // we waits any clicks pressed by user from the window
-		pOut->PrintMsg(str);  // here we display on the window as an Output the order or the message we want + the string we type 		
-		
-		if (ch == Backspace)
+		pWind->WaitKeyPress(ch);
+		switch (ch)
 		{
-			str.pop_back();
-		}
-
-		else if (ch == Escape)
-		{
-			if (!str.empty())
+		case Backspace:
+			if (!str.empty()) //we check that the string is not empty because if it is empty and we made Backspace this will cause erorrs 
+			{
+				str.pop_back(); // pop_back is member function of class string deletes the last character in the str 
+				pOut->PrintMsg(str); //we update the string displayed after we pressed backspace (after the last character was deleted)
+			}
+			break;
+		case Escape:
+			if (!str.empty()) // mmake sure that there is string to be deleted because if there is not, it will be pointless to delete it.
 			{
 				str.clear();
 			}
+			break;
+		case Enter: //if we pressed enter just get out of the loop and end the string
+			break;
+		default:   // if ch is not enter or backspace or escape , just add the character to the string and then display it.
+			str.push_back(ch); //push_back add the character to the end of the string
+			pOut->PrintMsg(str);
+			break;
 		}
+	} 
+	while (ch != Escape && ch != Enter); 
+return str;
 
-		else if (ch == Enter)
-		{
-			return;
-		}
-		else str.push_back(ch);
-		
-		
-	} while (c!=Escape || c!=Enter);
-
-	return str;
 }
 
 
