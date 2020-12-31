@@ -28,7 +28,7 @@ Component* Select:: GetSelctedComponent()
 	Input* pInput = pManager->GetInput();
 	int x, y;
 	pInput->GetPointClicked(x, y);
-	for (int i = 0; i < pManager->CompCount; i++)
+	for (int i = 0; i < pManager->GetComponentsCount(); i++)
 	{
 		GraphicsInfo RectangularArea = ComponentsList[i]->Graphics_Info();
 		if (BelongToRectangularArea(RectangularArea, x, y))
